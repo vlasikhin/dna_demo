@@ -8,7 +8,13 @@
         = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
           = f.error_notification
           .panel-body
-            = f.input :email, required: true, label: false, placeholder: 'Email', autofocus: true
+            = f.input :name, required: true, label: false, placeholder: 'Имя', autofocus: true
+            = f.input :surname, required: true, label: false, placeholder: 'Фамилия'
+            = f.input :patronymic, required: true, label: false, placeholder: 'Отчество'
+            = f.input :phone_number, required: true, label: false, placeholder: 'Номер телефона'
+            = f.input :city, required: true, label: false, placeholder: 'Город'
+            = f.input :address, required: true, label: false, placeholder: 'Адрес'
+            = f.input :email, required: true, label: false, placeholder: 'Email'
             = f.input :password, required: true, label: false, placeholder: 'Password', hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
             = f.input :password_confirmation, label: false, required: true, placeholder: 'Password confirmation'
             = f.button :submit, 'Зарегистрироваться', class: 'btn-info btn-block'
