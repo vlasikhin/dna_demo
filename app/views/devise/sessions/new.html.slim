@@ -4,7 +4,7 @@
       .log-in.panel
         .panel-heading
           h2.text-center
-            | Войти
+            | Вход
         = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           .panel-body
             = f.input :email, required: false, autofocus: true
