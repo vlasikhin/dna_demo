@@ -5,4 +5,13 @@ nav.navbar.navbar-default
         = link_to 'dnateam demo', root_path
     ul.nav.navbar-nav.navbar-right
       li
-        = link_to 'Регистрация', '#'
+        - if signed_in?
+          li.active
+            = link_to "#{current_user.email}", edit_user_registration_path(current_user)
+          li
+            = link_to 'Выход', destroy_user_session_path, method: :delete
+        - else
+          li
+            = link_to 'Регистрация', new_user_registration_path
+          li
+            = link_to 'Вход', new_user_session_path
