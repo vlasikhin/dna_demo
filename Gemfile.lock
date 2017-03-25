@@ -60,6 +60,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     coderay (1.1.1)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
@@ -89,6 +93,9 @@ GEM
     ffi (1.9.18-java)
     ffi (1.9.18-x64-mingw32)
     ffi (1.9.18-x86-mingw32)
+    file_validators (2.1.0)
+      activemodel (>= 3.0)
+      mime-types (>= 1.0)
     fuubar (2.2.0)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -283,9 +290,11 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   capybara
+  carrierwave (~> 1.0)
   coffee-rails (~> 4.2)
   devise
   factory_girl_rails
+  file_validators
   fuubar
   html2slim
   jbuilder (~> 2.5)

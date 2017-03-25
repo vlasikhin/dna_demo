@@ -15,7 +15,8 @@ gem 'simple_form'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
-
+gem 'carrierwave', '~> 1.0'
+gem 'file_validators'
 gem 'html2slim'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
