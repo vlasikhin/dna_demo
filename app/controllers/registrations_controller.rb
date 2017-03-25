@@ -11,7 +11,8 @@ class RegistrationsController < Devise::RegistrationsController
         :address,
         :email,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :document_scan
     )
   end
 
