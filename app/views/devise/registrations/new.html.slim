@@ -14,9 +14,10 @@
             = f.input :phone_number, required: true, label: false, placeholder: 'Номер телефона'
             = f.input :city, required: true, label: false, placeholder: 'Город'
             = f.input :address, required: true, label: false, placeholder: 'Адрес'
-            = f.input :email, required: true, label: false, placeholder: 'Email'
-            = f.input :password, required: true, label: false, placeholder: 'Password', hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
-            = f.input :password_confirmation, label: false, required: true, placeholder: 'Password confirmation'
+            = f.input :email, required: true, label: false, placeholder: 'Почта'
+            = f.input :password, required: true, label: false, placeholder: 'Пароль', hint: ("#{@minimum_password_length} символов минимум" if @minimum_password_length)
+            = f.input :password_confirmation, label: false, required: true, placeholder: 'Подтверждение пароля'
+            = f.input :document_scan, as: :file, label: 'Документ подтверждающий личность:'
             = f.button :submit, 'Зарегистрироваться', class: 'btn-info btn-block'
             hr
               .text-center

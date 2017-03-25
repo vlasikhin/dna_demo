@@ -16,4 +16,5 @@ RSpec.describe User, type: :model do
   it { should validate_length_of(:address).is_at_least(3).is_at_most(150) }
 
   it { should validate_uniqueness_of(:email).ignoring_case_sensitivity }
+
 end

@@ -14,4 +14,7 @@ class User < ApplicationRecord
   validates :city,          length: { minimum: 3,  maximum: 20 }
   validates :address,       length: { minimum: 3,  maximum: 150 }
 
+  validates :document_scan, file_size: { less_than: 15.megabytes }
+
+  mount_uploader :document_scan, DocumentScanUploader
 end
