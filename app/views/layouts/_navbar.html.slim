@@ -6,6 +6,9 @@ nav.navbar.navbar-default
     ul.nav.navbar-nav.navbar-right
       li
         - if signed_in?
+          - if current_user.admin?
+            li
+              = link_to 'Список пользователей', users_index_path
           li.active
             = link_to "#{current_user.email}", edit_user_registration_path(current_user)
           li

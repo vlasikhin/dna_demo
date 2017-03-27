@@ -1,5 +1,4 @@
-.row
-  .col-sm-10.col-sm-offset-1
-    h1 Добро Пожаловать %USERNAME%!
-
-    p Ваш аккаунт %activated%
+- if signed_in?
+  = render 'welcome/welcome'
+- else
+  = render 'welcome/not_registered'
