@@ -1,0 +1,44 @@
+.container
+  .row
+    .col-md-12
+      - if @users.count > 0
+        table.table.table-striped
+          thead
+            th.col-md-2
+              | ФИО
+            th.col-md-2
+              | Телефон
+            th.col-md-2
+              | Адрес
+            th.col-md-1
+              | Город
+            th.col-md-1
+              | Документ
+            th.col-md-1
+              | Роль
+            th.col-md-1
+              | Статус
+            th.col-md-1
+              | Блокировка
+          tbody
+            - @users.each do |user|
+              tr
+                td
+                  | #{user.name} #{user.surname} #{user.patronymic if user.patronymic}
+                td
+                  = user.phone_number
+                td
+                  = user.address
+                td
+                  = user.city
+                td
+                  = link_to 'Документ', user.document_scan.url
+                td
+                  - if user.admin?
+                    | Admin
+                  - else
+                    | User
+                td
+                  | %Ожидает подтверждения%
+                td
+                  | %Action%

@@ -1,0 +1,7 @@
+- if signed_in?
+  - if current_user.admin?
+    = render 'admin_page', users: @users
+  - else
+    = render 'welcome/welcome'
+- else
+  = render 'welcome/not_registered'
