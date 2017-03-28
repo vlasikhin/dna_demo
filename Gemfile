@@ -23,6 +23,8 @@ gem 'jquery-rails'
 gem 'slim'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5'
+gem 'omniauth'
+gem 'omniauth-vkontakte'
 
 
 

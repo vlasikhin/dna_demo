@@ -10,7 +10,7 @@ nav.navbar.navbar-default
             li
               = link_to 'Список пользователей', users_index_path
           li.active
-            = link_to "#{current_user.email}", edit_user_registration_path(current_user)
+            = link_to "#{current_user.name}", edit_user_registration_path(current_user)
           li
             = link_to 'Выход', destroy_user_session_path, method: :delete
         - else
