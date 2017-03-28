@@ -13,7 +13,7 @@
             th.col-md-1
               | Город
             th.col-md-1
-              | Документ
+              | Документ/Профиль
             th.col-md-1
               | Роль
             th.col-md-1
@@ -32,7 +32,12 @@
                 td
                   = user.city
                 td
-                  = link_to 'Документ', user.document_scan.url
+                  - if user.document_scan.present?
+                    = link_to 'Документ', user.document_scan.url
+                  - elsif user.url.present?
+                    = link_to 'Профиль', user.url
+                  - else
+                    | Нет информации
                 td
                   - if user.admin?
                     | Admin

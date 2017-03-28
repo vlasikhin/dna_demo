@@ -1,20 +1,54 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable,
+         :omniauthable,
+         omniauth_providers: [:vkontakte]
 
   validates :email, uniqueness: true
-
-  validates :name, :surname, :phone_number, :city, :address, presence: true
-
-  validates :name,          length: { minimum: 2,  maximum: 20 }
-  validates :surname,       length: { minimum: 2,  maximum: 30 }
-  validates :phone_number,  length: { minimum: 3,  maximum: 20 }
-  validates :city,          length: { minimum: 3,  maximum: 20 }
-  validates :address,       length: { minimum: 3,  maximum: 150 }
-
+  validates :name, length: { minimum: 2,  maximum: 20 }, presence: true
   validates :document_scan, file_size: { less_than: 15.megabytes }
 
   mount_uploader :document_scan, DocumentScanUploader
+
+  has_many :authorizations, dependent: :destroy
+
+  def self.find_for_oauth(auth)
+    authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
+    return authorization.user if authorization
+
+    name = auth.info[:first_name]
+    surname = auth.info[:last_name]
+    city = auth.info[:location]
+    url = auth.info[urls: 'Vkontakte']
+    email = auth.info[:email]
+
+    return nil if email.blank?
+
+    user = User.where(email: email).first
+
+    if user
+      user.create_authorization(auth)
+    else
+      password = Devise.friendly_token[0, 20]
+      user = User.create!(
+          name: name,
+          email: email,
+          surname: surname,
+          city: city,
+          url: url,
+          password: password,
+          password_confirmation: password
+      )
+      user.create_authorization(auth)
+    end
+    user
+  end
+
+  def create_authorization(auth)
+    authorizations.create(provider: auth.provider, uid: auth.uid)
+  end
 end

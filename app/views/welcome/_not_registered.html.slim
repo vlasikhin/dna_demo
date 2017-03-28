@@ -3,3 +3,5 @@
     h1 Привет!
     p
       | Вы можете #{link_to 'войти',new_user_session_path } или #{link_to 'зарегистрироваться', new_user_registration_path}
+    p
+      | Так же можно войти через #{link_to 'Vkontakte', user_vkontakte_omniauth_authorize_path}

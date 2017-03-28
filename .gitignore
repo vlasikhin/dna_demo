@@ -6,3 +6,4 @@
 .idea/
 /.bundle
 /public/uploads/*
+/config/secrets.yml
