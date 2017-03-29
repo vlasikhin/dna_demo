@@ -18,6 +18,6 @@ feature 'User try register' do
     attach_file 'Документ подтверждающий личность:', "#{Rails.root}/spec/support/files/good_test_file.pdf"
     click_on 'Зарегистрироваться'
 
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+    expect(page).to have_content 'Добро пожаловать! Вы успешно зарегистрировались.'
   end
 end
