@@ -8,6 +8,6 @@ feature 'User try sign out' do
     sign_in(user)
 
     click_on 'Выход'
-    expect(page).to have_content 'Signed out successfully.'
+    expect(page).to have_content 'Выход из системы выполнен.'
   end
 end
