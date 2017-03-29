@@ -23,6 +23,22 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'pending approval' do
+
+    it 'change pending approval from nil to false' do
+      user = create(:user)
+      expect do
+        user.ban_user!
+      end.to change { user.ban_user }.from(false).to(true)
+    end
+
+    it 'change pending approval from nil to true' do
+      user = create(:user, ban_user: true)
+      expect do
+        user.cancel_ban_user!
+      end.to change { user.ban_user }.from(true).to(false)
+    end
+  end
   describe '.find_for_oauth' do
     let!(:user){ create(:user) }
     let(:auth){ OmniAuth::AuthHash.new(provider: 'vkontakte', uid: '123456') }

@@ -2,7 +2,7 @@
   .row
     .col-md-12
       - if @users.count > 0
-        table.table.table-striped
+        table.table.table-hover
           thead
             th.col-md-2
               | ФИО
@@ -45,8 +45,8 @@
                     | User
                 td
                   - if user.pending_approval.nil?
-                    .verification_result
-                    .verification
+                    .verification_result id="verification_result_#{user.id}"
+                    .verification id="verification_#{user.id}"
                       .btn-group
                         = link_to 'Подтвердить', confirm_verification_user_path(user), method: :post, remote: true, class: 'btn btn-success btn-xs'
                         = link_to 'Отклонить', decline_verification_user_path(user), method: :post, remote: true, class: 'btn btn-danger btn-xs'
@@ -57,9 +57,10 @@
                   - else
                     | Прошел модерацию
                 td
-                  - if user.admin?
-                    | Блокировка не требуется
-                  - elsif user.ban_user?
-                    = link_to 'Разблокировать', '#',class: 'btn btn-success'
-                  - else
-                    = link_to 'Заблокировать', '#', class: 'btn btn-danger'
+                  .ban_functional id="ban_user_id_#{user.id}"
+                    - if user.admin?
+                      | Блокировка не требуется
+                    - elsif user.ban_user?
+                      = link_to 'Разблокировать', cancel_ban_user_user_path(user), method: :post, remote: true, class: 'btn btn-success', id: "ban_id_#{user.id}"
+                    - else
+                      = link_to 'Заблокировать', ban_user_user_path(user), method: :post, remote: true, class: 'btn btn-danger', id: "ban_id_#{user.id}"

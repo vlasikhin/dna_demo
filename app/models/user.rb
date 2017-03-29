@@ -65,4 +65,16 @@ class User < ApplicationRecord
       update!(pending_approval: true)
     end
   end
+
+  def ban_user!
+    transaction do
+      update!(ban_user: true)
+    end
+  end
+
+  def cancel_ban_user!
+    transaction do
+      update!(ban_user: false)
+    end
+  end
 end
