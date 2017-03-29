@@ -8,4 +8,13 @@ Rails.application.routes.draw do
 
   get   'users/index'
   root  'welcome#index'
+
+  resources :users do
+    member do
+      post :confirm_verification
+      post :decline_verification
+      post :ban_user
+      post :cancel_ban_user
+    end
+  end
 end
