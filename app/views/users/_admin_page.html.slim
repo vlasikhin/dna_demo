@@ -6,17 +6,17 @@
           thead
             th.col-md-2
               | ФИО
-            th.col-md-2
+            th.col-md-1
               | Телефон
             th.col-md-2
               | Адрес
-            th.col-md-1
+            th.col-md-2
               | Город
             th.col-md-1
-              | Документ/Профиль
+              | Документ/ Профиль
             th.col-md-1
               | Роль
-            th.col-md-1
+            th.col-md-2
               | Статус
             th.col-md-1
               | Блокировка
@@ -44,6 +44,22 @@
                   - else
                     | User
                 td
-                  | %Ожидает подтверждения%
+                  - if user.pending_approval.nil?
+                    .verification_result
+                    .verification
+                      .btn-group
+                        = link_to 'Подтвердить', confirm_verification_user_path(user), method: :post, remote: true, class: 'btn btn-success btn-xs'
+                        = link_to 'Отклонить', decline_verification_user_path(user), method: :post, remote: true, class: 'btn btn-danger btn-xs'
+                  - elsif user.pending_approval?
+                    | Не прошел модерацию
+                  - elsif user.social_network?
+                    | Авторизован через соц. сеть
+                  - else
+                    | Прошел модерацию
                 td
-                  | %Action%
+                  - if user.admin?
+                    | Блокировка не требуется
+                  - elsif user.ban_user?
+                    = link_to 'Разблокировать', '#',class: 'btn btn-success'
+                  - else
+                    = link_to 'Заблокировать', '#', class: 'btn btn-danger'

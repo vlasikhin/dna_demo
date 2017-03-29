@@ -7,6 +7,22 @@ RSpec.describe User, type: :model do
   it { should validate_length_of(:name).is_at_least(2).is_at_most(20) }
   it { should validate_uniqueness_of(:email).ignoring_case_sensitivity }
 
+  describe 'pending approval' do
+    let(:user){ create(:user) }
+
+    it 'change pending approval from nil to false' do
+      expect do
+        user.confirm_verification!
+      end.to change { user.pending_approval }.from(nil).to(false)
+    end
+
+    it 'change pending approval from nil to true' do
+      expect do
+        user.decline_verification!
+      end.to change { user.pending_approval }.from(nil).to(true)
+    end
+  end
+
   describe '.find_for_oauth' do
     let!(:user){ create(:user) }
     let(:auth){ OmniAuth::AuthHash.new(provider: 'vkontakte', uid: '123456') }

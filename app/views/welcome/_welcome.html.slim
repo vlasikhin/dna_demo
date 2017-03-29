@@ -1,4 +1,12 @@
 .row
   .col-sm-10.col-sm-offset-1
-    h1 Добро Пожаловать #{current_user.name}!
-    p Ваш аккаунт %activated%
+    h1 Добрый день!
+    - if current_user.pending_approval.nil?
+      p Ваша заявка на регистрацию находится у рассмотрении у модератора.
+    - elsif current_user.pending_approval?
+      p К сожалению #{current_user.name}, Ваша заявка на регистрацию отклонена из-за несоответсвия персональных данных
+    - elsif current_user.social_network?
+      p Добро пожаловать, #{current_user.name}, вы успешно авторизовались через соц сеть.
+    - else
+      p Спасибо, #{current_user.name}, Ваша заявка на регистрацию успешно подтверждена модератором, добро пожаловать!
+

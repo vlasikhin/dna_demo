@@ -23,7 +23,7 @@ class User < ApplicationRecord
     name = auth.info[:first_name]
     surname = auth.info[:last_name]
     city = auth.info[:location]
-    url = auth.info[urls: 'Vkontakte']
+    url = 'http://vk.com/id' + auth.uid
     email = auth.info[:email]
 
     return nil if email.blank?
@@ -40,6 +40,8 @@ class User < ApplicationRecord
           surname: surname,
           city: city,
           url: url,
+          pending_approval: false,
+          social_network: true,
           password: password,
           password_confirmation: password
       )
@@ -50,5 +52,17 @@ class User < ApplicationRecord
 
   def create_authorization(auth)
     authorizations.create(provider: auth.provider, uid: auth.uid)
+  end
+
+  def confirm_verification!
+    transaction do
+      update!(pending_approval: false)
+    end
+  end
+
+  def decline_verification!
+    transaction do
+      update!(pending_approval: true)
+    end
   end
 end

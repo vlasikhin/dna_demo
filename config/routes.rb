@@ -8,4 +8,11 @@ Rails.application.routes.draw do
 
   get   'users/index'
   root  'welcome#index'
+
+  resources :users do
+    member do
+      post :confirm_verification
+      post :decline_verification
+    end
+  end
 end
